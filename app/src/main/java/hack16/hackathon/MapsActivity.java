@@ -9,10 +9,14 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
+import android.location.Geocoder;
+import android.location.Address;
+import java.util.*;
+import java.lang.*;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +26,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
 
     }
 
@@ -38,9 +44,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        
 
-        // Add a marker in Sydney and move the camera
+
+        // Add a marker in Santa Cruz and move the camera
         LatLng santaCruz = new LatLng(36.9719, -122.0264);
         mMap.addMarker(new MarkerOptions().position(santaCruz).title("Marker in Santa Cruz"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(santaCruz));

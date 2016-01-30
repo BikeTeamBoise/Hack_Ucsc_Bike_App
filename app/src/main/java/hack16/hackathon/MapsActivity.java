@@ -1,5 +1,5 @@
 package hack16.hackathon;
-
+/*so many important statements. remove ones we dont use */
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;

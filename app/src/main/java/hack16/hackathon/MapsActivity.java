@@ -8,9 +8,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-
+import android.support.v4.content.ContextCompat;
 import java.lang.Throwable;
-
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -44,7 +44,7 @@ import android.widget.EditText;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
-        LocationListener {
+        LocationListener,ActivityCompat.OnRequestPermissionsResultCallback {
 
     private GoogleMap mMap;
     private GoogleApiClient mGoogleApiClient;
@@ -52,7 +52,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public static final String TAG = MapsActivity.class.getSimpleName();
     private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +72,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .addApi(LocationServices.API)
                 .build();
 
+
+
     }
 
 
@@ -88,21 +89,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mMap.moveCamera(CameraUpdateFactory.zoomIn());
+
 
         // Add a marker in Santa Cruz and move the camera
-       /*
-        LatLng santaCruz = new LatLng(36.9719, -122.0264);
 
-        mMap.addMarker(new MarkerOptions().position(santaCruz).title("Marker in Santa Cruz"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(santaCruz));*/
+
+        /*mMap.addMarker(new MarkerOptions().position(santaCruz).title("Marker in Santa Cruz"));*/
+
+
+
         setUpMapIfNeeded();
-    }
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            mMap.setMyLocationEnabled(true);
 
+
+        } else {
+            // Show rationale and request permission.
+
+        }
+
+
+    }
     @Override
     /**Whenever a new location is detected*/
     public void onLocationChanged(Location location) {
         handleNewLocation(location);
+
     }
 
     @Override
@@ -116,8 +129,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
+
             return;
         }
+
+
         Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if (location == null) {
             LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
@@ -125,10 +141,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         else {
             handleNewLocation(location);
         }
+
+
     }
 
     private void handleNewLocation(Location location) {
         Log.d(TAG, location.toString()); /**see if a actual location is printed or nothing */
+
 
         double currentLatitude = location.getLatitude();
         double currentLongitude = location.getLongitude();
@@ -136,9 +155,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         MarkerOptions options = new MarkerOptions()
                 .position(latLng)
-                .title("I am here!");
-        mMap.addMarker(options);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                .title("Your Location");
+      /*  mMap.addMarker(options);*/
+
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        /*moveCamera*/
+            /*mMap.animateCamera(CameraUpdateFactory.zoomBy(15.0f));*/
+
+
+
+
+
     }
     @Override
     /**logs*/
@@ -157,16 +184,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 e.printStackTrace();
             }
         } else {
-            LatLng santaCruz = new LatLng(36.9719, -122.0264);
 
-            mMap.addMarker(new MarkerOptions().position(santaCruz).title("Marker in Santa Cruz"));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(santaCruz));
             Log.i(TAG, "Location services connection failed with code " + connectionResult.getErrorCode());
         }
     }
     /*called if mMap is not null - puts marker down*/
     private void setUpMap() {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+        /*mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));*/
+
 
     }
     /*sets up map if possible*/
@@ -176,6 +201,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             // Try to obtain the map from the SupportMapFragment.
             mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
                     .getMap();
+
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
                 setUpMap();

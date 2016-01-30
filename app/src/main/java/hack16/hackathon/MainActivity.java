@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -85,6 +86,8 @@ public class MainActivity extends AppCompatActivity
             // Handle the camera action
             Intent i = new Intent(MainActivity.this, MapsActivity.class);
             startActivity(i);
+
+
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {

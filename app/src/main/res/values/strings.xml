@@ -2,7 +2,8 @@
     <string name="app_name">Hackathon</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_main">MainActivity</string>
-
+    <string name="location">Enter Location</string>
+    <string name="searchbutton">Search</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 

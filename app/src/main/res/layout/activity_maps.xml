@@ -22,16 +22,26 @@
             android:id="@+id/button"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_gravity="left|center_horizontal"
-            android:background="#359c5e"
-            android:layout_marginBottom="14dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="14dp"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom|right"
             android:text="Temp Button"
             android:onClick="goToRoute"
             android:textColor="#ffffff"
             style="?android:attr/borderlessButtonStyle"/>
+
+        <Button
+            android:id="@+id/searchbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"/>
+
+        <EditText
+            android:id="@+id/location"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:layout_toLeftOf="@id/searchbutton"
+            android:onClick="searchRoutes"/>
     </RelativeLayout>
 </RelativeLayout>
 

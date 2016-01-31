@@ -92,14 +92,10 @@ public class Database extends SQLiteOpenHelper {
         return c;
     }
 
-    public Cursor fetchRoutes(){
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.query("routes",new String[] {"route"},null,null,null,null,null);
-
-        if(cursor != null){
-            cursor.moveToFirst();
-        }
-        return cursor;
+    public Cursor getRoute(int pos){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM customroutes where key="+pos,null);
+        return c;
     }
 
 }

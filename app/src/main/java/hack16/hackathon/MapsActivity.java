@@ -72,18 +72,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         googleMap = mapFragment.getMap();
-/*
-        MarkerOptions options = new MarkerOptions();
-        options.position(LOWER_MANHATTAN);
-        options.position(BROOKLYN_BRIDGE);
-        options.position(TIMES_SQUARE);
-        mMap.addMarker(options);*/
-
-     //   points.add(new LatLng(36.977176, -122.053814))
-        // points.add(new LatLng(36.975416, -122.052602));
-        //points.add(new LatLng(36.974651, -122.058374));
-        //points.add(new LatLng(36.970074, -122.058084));
-
 
         mLocationRequest = LocationRequest.create()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
@@ -94,6 +82,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build();
+
+        if(getIntent().hasExtra("lat_1")){
+            clear();
+            LatLng l = new LatLng(getIntent().getDoubleExtra("lat_1",0), getIntent().getDoubleExtra("long_1",0));
+            points.add(l);
+            l = new LatLng(getIntent().getDoubleExtra("lat_2",0), getIntent().getDoubleExtra("long_2",0));
+            points.add(l);
+            String url = getMapsApiDirectionsUrl(points);
+            ReadTask downloadTask = new ReadTask();
+            downloadTask.execute(url);
+        }
+
 // Setting a click event handler for the map
         googleMap.setOnMapClickListener(new OnMapClickListener() {
 
@@ -371,8 +371,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         startActivity(i);
     }
     public void funcEraseMarkers(View view){
-        googleMap.clear();
-        points.clear();
+        clear();
     }
     public void funcMakeWaypoint(View view){
         if(points.size() >= 2) {
@@ -386,11 +385,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             db.addRoute();
             db.addCustomRoute(points.get(0));
-            db.addCustomRoute(points.get(points.size()-1));
-            //db.increment();
+            db.addCustomRoute(points.get(points.size() - 1));
 
-            googleMap.clear();
-            points.clear();
+            clear();
         }
+    }
+
+    public void clear(){
+        googleMap.clear();
+        points.clear();
     }
 }

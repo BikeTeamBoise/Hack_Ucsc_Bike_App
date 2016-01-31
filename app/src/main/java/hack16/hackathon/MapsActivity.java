@@ -384,7 +384,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             Database db = new Database(this);
 
-
+            db.addRoute();
+            db.addCustomRoute(points.get(0));
+            db.addCustomRoute(points.get(points.size()-1));
+            //db.increment();
 
             googleMap.clear();
             points.clear();

@@ -10,10 +10,17 @@
 The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
 Google Maps Android API v2, but are recommended.
 -->
+    <permission
+        android:name="com.javapapers.android.maps.path.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="com.javapapers.android.maps.path.permission.MAPS_RECEIVE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -35,7 +42,7 @@ Google Maps Android API v2, but are recommended.
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps">
+            android:label="maps">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -44,7 +51,7 @@ Google Maps Android API v2, but are recommended.
         </activity>
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_main"
+            android:label="main"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

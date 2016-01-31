@@ -13,14 +13,28 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.HeaderViewListAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    //LIST OF ARRAY STRINGS WHICH WILL SERVE AS LIST ITEMS
+    ArrayList<String> listItems=new ArrayList<String>();
+
+    //DEFINING A STRING ADAPTER WHICH WILL HANDLE THE DATA OF THE LISTVIEW
+    ArrayAdapter<String> adapter;
+
+    int clickCounter = 0;
+    private ListView mListView;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -42,6 +56,39 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        if(mListView == null){
+            mListView = (ListView) findViewById(R.id.list);
+        }
+
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,listItems);
+        setListAdapter(adapter);
+    }
+
+    public void addRoute(View v){
+        listItems.add("Clicked : "+clickCounter++);
+        adapter.notifyDataSetChanged();
+    }
+
+    protected ListView getListView(){
+        if (mListView == null){
+            mListView = (ListView) findViewById(R.id.list);
+        }
+        return mListView;
+    }
+
+    protected void setListAdapter(ListAdapter adapter){
+        getListView().setAdapter(adapter);
+    }
+
+    protected ListAdapter getListAdapter(){
+        ListAdapter adapter = getListView().getAdapter();
+        if(adapter instanceof HeaderViewListAdapter){
+            return ((HeaderViewListAdapter)adapter).getWrappedAdapter();
+        }
+        else{
+            return adapter;
+        }
     }
 
     @Override
@@ -86,8 +133,6 @@ public class MainActivity extends AppCompatActivity
             // Handle the camera action
             Intent i = new Intent(MainActivity.this, MapsActivity.class);
             startActivity(i);
-
-
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {

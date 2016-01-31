@@ -13,7 +13,7 @@ import com.google.android.gms.maps.model.LatLng;
  * Created by Trevor on 1/30/2016.
  */
 public class Database extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 7;
     private static final String DATABASE_NAME = "Custom Routes";
     public static final String KEY_ID = "id";
     public static final String KEY_KEY = "key";

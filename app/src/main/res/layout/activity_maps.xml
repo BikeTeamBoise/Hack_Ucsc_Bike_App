@@ -12,6 +12,11 @@
      tools:context="hack16.hackathon.MapsActivity"
         tools:layout="@layout/activity_maps" />
     <!--Adds a button on top of the map-->
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/map"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,10 +33,37 @@
             android:layout_marginBottom="14dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="14dp"
-            android:text="Temp Button"
+            android:text="Menu"
             android:onClick="goToRoute"
             android:textColor="#ffffff"
             style="?android:attr/borderlessButtonStyle"/>
+        <Button
+            android:id="@+id/buttontwo"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="right|center_horizontal"
+            android:background="#359c5e"
+            android:layout_marginBottom="14dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="14dp"
+            android:text="Erase Markers"
+            android:onClick="funcEraseMarkers"
+            android:textColor="#ffffff"/>
+        <Button
+            android:id="@+id/buttonthree"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center|center_horizontal"
+            android:background="#359c5e"
+            android:layout_marginBottom="14dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="14dp"
+            android:text="Make Waypoint"
+            android:onClick="funcMakeWaypoint"
+            android:textColor="#ffffff"/>
+
     </RelativeLayout>
 </RelativeLayout>
 

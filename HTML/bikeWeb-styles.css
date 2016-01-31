@@ -1,0 +1,344 @@
+/*
+Here are some commonly used CSS class selectors which 
+-class rules can applied to multiple elements on a page
+-can be applied in any combination
+*/
+@font-face {/*instructions to browser where to find your custom font*/
+	font-family: font1;
+	src:		url("fonts/coolvetica_rg.ttf") ,/*.ttf for non-IE browsers - the comma is very important!!!!*/
+			url("fonts/coolvetica_rg.eot");/*.eot for IE browsers*/	
+}
+* {
+	box-sizing:border-box;/*This allows you to set and border width and padding but the div will retain its set width and set height*/
+}
+html, body {
+	width:100%;
+	min-height:100%;
+	height:auto;
+}
+header, nav, section, article, figure, figcaption, aside, footer {/*ensures older browsers display these tags correctly*/
+	display:block;
+	/*DON'T ADD anything else in this selector block - only this property should be in this CSS selector set*/
+}
+body {/*these are the 5 basic CSS properties and values to start a website*/
+	font-family: Verdana, sans-serif;/*change this for your design*/
+	font-size:100%;/*DON'T CHANGE THIS VALUE HERE - you can set font sizes in other selector styles*/
+	color:rgba(0,0,0,1.00);/*main text color, default black, change as needed*/
+	margin:0;/*removes default edges*/
+	padding:0;/*removes default settings*/
+	z-index:0;/*stacking order - small numbers a below high numbers*/
+	position:relative;
+}
+
+*:focus {
+	outline: 0;
+}
+
+#centeringDiv {
+	width: 870px;/*optimum height for both desktops, laptops, and tablets*/
+	height: 350px;
+	margin-top: 50px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-bottom: 45px;/*0 = no margin for top and bottom and auto = same margin for left and right*/
+	margin-top: 50px;/*lowers centeringDiv so that it's not behind and covered up by the topBar*/
+	position: relative;/*all children divs inside centeringDiv take their (x,y) position from top left of centeringDiv*/
+	z-index: 1;/*stacking order - small numbers a below high numbers*/
+}
+header {
+	padding:10px;
+	width:100%;
+	height:150px;
+	position:relative;/*all children divs inside header take their (x,y) position from top left of header*/	
+}
+nav {
+	position:relative;
+	width:100%;/*change as needed*/
+	height:90px;/*change as needed*/
+	z-index:1000;/*stacking order, bigger numbers are on top*/	
+}
+.btn {
+	position: relative;/*makes it draggable*/
+	text-align: center;
+	z-index: 1001;/*stacking order, bigger numbers are on top*/
+	float: left;
+	width: 140px;
+	color: #FFFFFF;
+	font-size: 1.5em;
+	padding-top: 10px;
+	-webkit-transition: all .5s linear 0s;
+	-o-transition: all .5s linear 0s;
+	transition: all .5s linear 0s;
+	cursor: pointer;/*You can also add styles such as text link color, custom fonts, font-size, etc.*/
+	font-family: font1;
+	border-left: 1px #000000 solid;
+	border-right: 1px #000000 solid;
+}
+.btn:hover {
+	border-left:1px #FFFFFF solid;
+	border-right:1px #FFFFFF solid;
+	border-left-color: #FFFFFF;
+	border-right-color: #FFFFFF;
+}
+.section {/*used for the main content area*/
+	position:relative;
+	width:100%;
+	min-height:600px;
+	z-index:899;/*stacking order - below nav and .btn and article*/	
+	overflow:visible;
+}
+article {/*used for the main content area*/
+	position:relative;
+	width:100%;
+	min-height:600px;
+	height:auto;
+	padding:10px;
+	z-index:900;/*stacking order - below nav and .btn but above section*/	
+}
+article p {
+	text-indent:3em;/*an rem is the size of a letter m relative to what's set in the body css rule*/
+}
+footer {
+	clear: both;/*clears away and floating or text wrapping*/
+	position: relative;
+	text-align: center;
+	font-size: 1em;
+	width: 100%;
+	padding-top: 6px;
+	padding-right: 6px;
+	padding-left: 6px;
+	padding-bottom: 6px;
+	line-height: 1.2em;/*This will help to vertically center the text */
+	height: auto;
+	z-index: 800;/*stacking order - below article, nav, and .btn*/
+	background-color: #FFF;
+	font-family: lyricFont;
+}
+/*===========Class rules to apply to multiple elements in the HTML===============================*/
+.frame {/*this creates a frame around photo/text*/
+	width: auto;/*fits the frame tightly around the photo/text*/
+	height: auto;/*fits the frame tightly around the photo/text*/
+	margin: 10px;/*separates the outer wrapping text away from the frame border*/
+	padding: 5px;/*separates the inner photo/text away from the frame border*/
+	text-align: center;/*centers any caption under/above the photo inside frame*/
+	border: 1px dotted #000000;/*styles the frame - adjust as desired*/
+}
+.frame p, figure p, figcaption p {text-indent: 0px;}/*for any paragraphs inside photo frames*/
+.floatLeft {	float: left;}/*positions an element on the left of parent div and have text wrap around it*/
+.floatRight {float: right;}/*positions an element on the right of parent div and have text wrap around it*/
+.centerText {text-align: center;}/*apply to p, h1, h2, h3, h4, h5, h6 tags - positions text in center of parent div*/
+.centerBox {	margin:0 auto;clear: both;}/*apply to div or figure tags - positions element in center of parent div - no outer text wrapping*/
+.clearFloats {clear: both;}/*apply to div tags - clears away and floating or text wrapping*/
+.roundedCorners10 {border-radius: 10px;}/*apply to img tags for rounded corners*/
+.roundedCorners15 {border-radius: 15px;}
+.roundedCorners20 {border-radius: 20px;}
+.boxShadow5 {box-shadow: 5px 5px 5px #000000;}/*apply to div or img tags for shadows*/
+.boxShadow10 {box-shadow: 10px 10px 10px #000000;}
+.textShadow5 {text-shadow: 5px 5px 10px #000000;}/*apply to p, h1, h2, h3, h4, h5, h6 tags for shadows*/
+.textShadow10 {text-shadow: 10px 10px 20px #000000;}
+
+#section1 {
+	margin: 0 auto;
+	width: 100%;
+	position: relative;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-position: 50% 0;
+	height: 1155px;
+	background: #ADD8E6; /* For browsers that do not support gradients */
+	background: -webkit-linear-gradient(rgba(173,216,230,1), rgba(216,239,255,1)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(rgba(173,216,230,1), rgba(216,239,255,1)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(rgba(173,216,230,1), rgba(216,239,255,1)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(rgba(173,216,230,1), rgba(216,239,255,1)); /* Standard syntax (must be last) */
+	
+}
+#section2 {
+	margin: 0 auto;
+	width: 100%;
+	position: relative;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-position: 50% 0;
+	height: 1155px;
+	background-color: #D8EFFF;
+	padding-left:50px;
+}
+#section3 {
+	margin: 0 auto;
+	width: 100%;
+	position: relative;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-position: 50% 0;
+	height: 1155px;
+	background-color: #D8EFFF;
+}
+#section4 {
+	margin: 0 auto;
+	width: 100%;
+	position: relative;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-position: 50% 0;
+	height: 1155px;
+	background: #ADD8E6; /* For browsers that do not support gradients */
+	background: -webkit-linear-gradient(rgba(216,239,255,1),rgba(255,241,216,1)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(rgba(216,239,255,1),rgba(255,241,216,1)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(rgba(216,239,255,1),rgba(255,241,216,1)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(rgba(216,239,255,1),rgba(255,241,216,1)); /* Standard syntax (must be last) */
+}
+.cicleBtn {
+	border-radius:20%;
+	width:30px;
+	height:30px;
+}
+
+/* Section 1 Stuff */
+#bikeImage {
+	background-image: url(images/bike.png);
+	height:368px;
+	width:600px;
+	float:left;
+	top:50px;
+	position:absolute;
+}
+#introText {
+	position:absolute;
+	top:450px;
+	width:330px;
+	float:left;
+	font-size:3em;
+	color:#000; /* Use #fff1a8 later */
+	font-family:font1;
+}
+#introArrow {
+	background-image: url(images/arrow.png);/*Use arrowYellow later */
+	height:100px;
+	width:100px;
+	float:left;
+	top:515px;
+	position:absolute;
+}
+#introArrow:hover {
+	cursor:pointer;
+}
+
+/* Section 2 Stuff */\
+.controls {
+  margin-top: 10px;
+  border: 1px solid transparent;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  height: 32px;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#origin-input,
+#destination-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 200px;
+}
+
+#origin-input:focus,
+#destination-input:focus {
+  border-color: #4d90fe;
+}
+
+#mode-selector {
+  color: #fff;
+  background-color: #4d90fe;
+  margin-left: 12px;
+  padding: 5px 11px 0px 11px;
+}
+
+#mode-selector label {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+#map {
+        float: left;
+        width: 63%;
+		top:75px;
+}
+
+#right-panel {
+        float: right;
+        width: 34%;
+        height: 100%;
+}
+
+#right-panel {
+  font-family: 'Roboto','sans-serif';
+  line-height: 30px;
+  padding-left: 10px;
+}
+
+#right-panel select, #right-panel input {
+  font-size: 15px;
+}
+
+#right-panel select {
+  width: 100%;
+}
+
+#right-panel i {
+  font-size: 12px;
+}
+
+.panel {
+    height: 100%;
+    overflow: auto;
+}
+
+.Content {
+	height:500px;
+	width:315px;
+	overflow:auto;
+	position:absolute;
+	max-width:600px;
+	top:75px;
+}
+
+/* Section 3 Stuff */
+#map2 {
+	height:400px;
+	width:600px;
+	top:150px;
+}
+#intro2Text {
+	font-size:3em;
+	top:5px;
+	position:absolute;
+	left:100px;
+	font-family:font1;
+}
+#intro3Text {
+	font-size:3em;
+	top:40px;
+	position:absolute;
+	left:100px;
+	font-family:font1;
+}
+#intro3TextSmall {
+	font-size:1.5em;
+	position:absolute;
+	top:100px;
+	left:100px;
+	font-family:font1;
+}
+/* Section 4 Stuff */
+#bikeAssistantName {
+	font-size:6em;
+	width:676px;
+	position: absolute;
+}

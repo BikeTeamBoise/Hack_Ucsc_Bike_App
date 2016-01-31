@@ -41,7 +41,7 @@
             android:id="@+id/buttontwo"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
             android:layout_gravity="right|center_horizontal"
             android:background="#359c5e"
             android:layout_marginBottom="14dp"
@@ -50,7 +50,19 @@
             android:text="Erase Markers"
             android:onClick="funcEraseMarkers"
             android:textColor="#ffffff"/>
-
+        <Button
+            android:id="@+id/buttonthree"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center|center_horizontal"
+            android:background="#359c5e"
+            android:layout_marginBottom="14dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="14dp"
+            android:text="Make Waypoint"
+            android:onClick="funcMakeWaypoint"
+            android:textColor="#ffffff"/>
 
     </RelativeLayout>
 </RelativeLayout>

@@ -56,7 +56,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
-
+    private final ArrayList<LatLng> points = new ArrayList<>();
     public static final String TAG = MapsActivity.class.getSimpleName();
     private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
     GoogleMap googleMap;
@@ -78,14 +78,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         options.position(BROOKLYN_BRIDGE);
         options.position(TIMES_SQUARE);
         mMap.addMarker(options);*/
-        ArrayList<LatLng> points = new ArrayList<>();
-        points.add(new LatLng(36.977176, -122.053814));
-        points.add(new LatLng(36.975416, -122.052602));
-        points.add(new LatLng(36.974651, -122.058374));
-        points.add(new LatLng(36.970074, -122.058084));
-        String url = getMapsApiDirectionsUrl(points);
-        ReadTask downloadTask = new ReadTask();
-        downloadTask.execute(url);
+
+     //   points.add(new LatLng(36.977176, -122.053814))
+        // points.add(new LatLng(36.975416, -122.052602));
+        //points.add(new LatLng(36.974651, -122.058374));
+        //points.add(new LatLng(36.970074, -122.058084));
+
 
         mLocationRequest = LocationRequest.create()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
@@ -111,7 +109,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 // Setting the title for the marker.
                 // This will be displayed on taping the marker
                 markerOptions.title(latLng.latitude + " : " + latLng.longitude);
-
+                points.add(latLng);
                 // Clears the previously touched position
 
 
@@ -227,8 +225,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 polyLineOptions.width(5);
                 polyLineOptions.color(Color.BLUE);
             }
-
-            mMap.addPolyline(polyLineOptions);
+            try {
+                mMap.addPolyline(polyLineOptions);
+            }
+            catch(Exception e){
+                System.out.println("Dont go to africa");
+            }
         }
     }
 
@@ -319,19 +321,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 e.printStackTrace();
             }
         } else {
-            LatLng santaCruz = new LatLng(36.9719, -122.0264);
+            //LatLng santaCruz = new LatLng(36.9719, -122.0264);
 
-            mMap.addMarker(new MarkerOptions().position(santaCruz).title("Marker in Santa Cruz"));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(santaCruz));
+          //  mMap.addMarker(new MarkerOptions().position(santaCruz).title("Marker in Santa Cruz"));
+            //mMap.moveCamera(CameraUpdateFactory.newLatLng(santaCruz));
             Log.i(TAG, "Location services connection failed with code " + connectionResult.getErrorCode());
         }
     }
     /*called if mMap is not null - puts marker down*/
     private void setUpMap() {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(37.00221,-122.055745)).title("Upper Campus Trail"));
-        mMap.addMarker(new MarkerOptions().position(TIMES_SQUARE).title("Times_square"));
-        mMap.addMarker(new MarkerOptions().position(LOWER_MANHATTAN).title("Lower manhattan"));
-        mMap.addMarker(new MarkerOptions().position(BROOKLYN_BRIDGE).title("Brooklyn bridge"));
+        //mMap.addMarker(new MarkerOptions().position(new LatLng(37.00221,-122.055745)).title("Upper Campus Trail"));
+        //mMap.addMarker(new MarkerOptions().position(TIMES_SQUARE).title("Times_square"));
+        //mMap.addMarker(new MarkerOptions().position(LOWER_MANHATTAN).title("Lower manhattan"));
+        //mMap.addMarker(new MarkerOptions().position(BROOKLYN_BRIDGE).title("Brooklyn bridge"));
 
     }
     /*sets up map if possible*/
@@ -376,6 +378,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
     public void funcEraseMarkers(View view){
         googleMap.clear();
+        points.clear();
     }
-
+    public void funcMakeWaypoint(View view){
+        if(points.size() >= 2) {
+            String url = getMapsApiDirectionsUrl(points);
+            ReadTask downloadTask = new ReadTask();
+            downloadTask.execute(url);
+            googleMap.addMarker(new MarkerOptions().position(points.get(0)));
+            googleMap.addMarker(new MarkerOptions().position(points.get(points.size()-1)));
+            googleMap.clear();
+            points.clear();
+        }
+    }
 }
